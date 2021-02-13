@@ -8,10 +8,13 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Link from '@material-ui/core/Link';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
+import SendIcon from '@material-ui/icons/Send';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 
 import { authenticationService } from '../Services/authenticationService';
 import history from '../Utilities/history';
-import logo from './logo.png';
+import logo from '../Assets/logo.png';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -61,9 +64,9 @@ const Header = () => {
 
     return (
         <div className={classes.root}>
-            <AppBar position="static">
+            <AppBar position="static" style={{ backgroundColor: '#3a9c93'}}>
                 <Toolbar>
-                    <Link href="/" className={classes.title}>
+                    <Link href="/" className={classes.title} style={{height: 70, width: 220 }}>
                         <img src={logo} alt="Logo" />
                     </Link>
                     <Button
@@ -73,8 +76,12 @@ const Header = () => {
                         className={classes.userDropdown}
                         color="inherit"
                     >
-                        {currentUser.name}
-                        {arrowIcon()}
+                        <ListItemIcon  style={{ color: '#FFF'}}>
+                            <AccountCircleIcon fontSize="small"/>
+                            {currentUser.username}
+                            {arrowIcon()}
+                        </ListItemIcon>
+
                     </Button>
                     <Menu
                         id="simple-menu"
@@ -91,7 +98,10 @@ const Header = () => {
                             horizontal: 'right',
                         }}
                     >
-                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                        <MenuItem onClick={handleLogout}>
+                            <ListItemIcon>
+                                <SendIcon fontSize="small" />
+                            </ListItemIcon>Logout</MenuItem>
                     </Menu>
                 </Toolbar>
             </AppBar>

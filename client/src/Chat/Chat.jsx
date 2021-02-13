@@ -1,23 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import List from '@material-ui/core/List';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import FolderIcon from '@material-ui/icons/Folder';
+import RestoreIcon from '@material-ui/icons/Restore';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import Typography from '@material-ui/core/Typography';
 
 import Header from '../Layout/Header';
 import ChatBox from './ChatBox';
 import Conversations from './Conversations';
 import Users from './Users';
+import backgroundMain from '../Assets/myBackground.jpg';
 
 const useStyles = makeStyles(theme => ({
     paper: {
-        minHeight: 'calc(100vh - 64px)',
-        borderRadius: 0,
-    },
-    sidebar: {
-        zIndex: 8,
+        flexGrow: 1,
+        display: 'flex',
+        alignItems: 'center',
+        marginTop: -540,
+        marginLeft: 100,
+        marginRight: 100,
+        borderRadius: 20,
+        borderColor: '#FFFFFF',
+        height: 380,
+        backgroundColor: '#3a9c93'
     },
     subheader: {
         display: 'flex',
@@ -25,18 +33,27 @@ const useStyles = makeStyles(theme => ({
         cursor: 'pointer',
     },
     globe: {
-        backgroundColor: theme.palette.primary.dark,
+        backgroundColor: '#3a9c93',
+        color:  '#3a9c93',
     },
     subheaderText: {
-        color: theme.palette.primary.dark,
+        color: '#3a9c93',
+    },
+    menuList: {
+        flexGrow: 1,
+        alignItems: 'center',
+        marginTop: -300,
+        borderBottom: 1,
+        backgroundColor: 'transparent',
     },
 }));
 
-const Chat = () => {
+const Chat = props => {
     const [scope, setScope] = useState('Global Chat');
     const [tab, setTab] = useState(0);
     const [user, setUser] = useState(null);
     const classes = useStyles();
+    const [value, setValue] = React.useState(0);
 
     const handleChange = (e, newVal) => {
         setTab(newVal);
@@ -46,33 +63,20 @@ const Chat = () => {
         <React.Fragment>
             <Header />
             <Grid container>
-                <Grid item md={4} className={classes.sidebar}>
-                    <Paper className={classes.paper} square elevation={5}>
-                        <Paper square>
-                            <Tabs
-                                onChange={handleChange}
-                                variant="fullWidth"
-                                value={tab}
-                                indicatorColor="primary"
-                                textColor="primary"
-                            >
-                                <Tab label="Chats" />
-                                <Tab label="Users" />
-                            </Tabs>
-                        </Paper>
-                        {tab === 0 && (
-                            <Conversations
-                                setUser={setUser}
-                                setScope={setScope}
-                            />
-                        )}
-                        {tab === 1 && (
-                            <Users setUser={setUser} setScope={setScope} />
-                        )}
-                    </Paper>
-                </Grid>
-                <Grid item md={8}>
-                    <ChatBox scope={scope} user={user} />
+                <img src={backgroundMain} alt="backgroundMain"/>
+                <Grid item className={classes.paper}>
+                    <BottomNavigation className={classes.menuList} 
+                        style={{ borderBottom: '0.1em solid black', padding: '0.5em' }}
+                        color="#FFF"
+                        value={value}
+                        onChange={(event, newValue) => {setValue(newValue);}}
+                        showLabels
+                        >
+                        <BottomNavigationAction label="Recents" icon={<RestoreIcon />}/>
+                        <BottomNavigationAction label="Favorites" icon={<RestoreIcon />}/>
+                        <BottomNavigationAction label="Nearby" icon={<RestoreIcon />}/>
+                        <BottomNavigationAction label="Nearby" icon={<RestoreIcon />}/>
+                    </BottomNavigation>
                 </Grid>
             </Grid>
         </React.Fragment>

@@ -17,10 +17,10 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
   },
   globe: {
-    backgroundColor: theme.palette.primary.dark,
+    backgroundColor: theme.palette.secondary.dark,
   },
   subheaderText: {
-    color: theme.palette.primary.dark,
+    color: theme.palette.secondary.dark,
   },
   list: {
     maxHeight: "calc(100vh - 112px)",
@@ -65,7 +65,7 @@ const Users = (props) => {
               <ListItemAvatar className={classes.avatar}>
                 <Avatar>{commonUtilites.getInitialsFromName(u.name)}</Avatar>
               </ListItemAvatar>
-              <ListItemText primary={u.name} />
+              <ListItemText secondary={u.name} />
             </ListItem>
           ))}
         </React.Fragment>
