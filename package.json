@@ -1,7 +1,7 @@
 {
-    "name": "chat-app",
+    "name": "adaRekberWeb",
     "version": "1.0.0",
-    "description": "MERN Stack Based Chat Application",
+    "description": "MERN Stack Based zadaRekberWeb Application",
     "main": "server.js",
     "scripts": {
         "client-install": "npm install --prefix client",
